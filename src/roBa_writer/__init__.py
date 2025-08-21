@@ -350,11 +350,11 @@ class FirmwareWriter:
 
         try:
             click.echo(f"Writing: {firmware_file.name} -> {drive_path}")
-            click.echo(f"Source path: {source_path}")
-            click.echo(f"Destination path: {dest_path}")
-            click.echo(f"Source file exists: {source_path.exists()}")
-            click.echo(
-                f"Destination directory exists: {Path(drive_path).exists()}"
+            click.secho(f"Source path: {source_path}", fg='bright_black')
+            click.secho(f"Destination path: {dest_path}", fg='bright_black')
+            click.secho(f"Source file exists: {source_path.exists()}", fg='bright_black')
+            click.secho(
+                f"Destination directory exists: {Path(drive_path).exists()}", fg='bright_black'
             )
 
             if not source_path.exists():
@@ -373,8 +373,8 @@ class FirmwareWriter:
             # ソースファイルの詳細情報を取得
             try:
                 source_stat = source_path.stat()
-                click.echo(f"Source file size: {source_stat.st_size} bytes")
-                click.echo(f"Source file permissions: {oct(source_stat.st_mode)}")
+                click.secho(f"Source file size: {source_stat.st_size} bytes", fg='bright_black')
+                click.secho(f"Source file permissions: {oct(source_stat.st_mode)}", fg='bright_black')
             except Exception as e:
                 click.echo(f"Error getting source file stats: {e}", err=True)
                 return False
@@ -382,17 +382,17 @@ class FirmwareWriter:
             # デスティネーションの詳細情報を取得
             try:
                 disk_usage = shutil.disk_usage(drive_path)
-                click.echo(f"Destination free space: {disk_usage.free} bytes")
+                click.secho(f"Destination free space: {disk_usage.free} bytes", fg='bright_black')
 
                 # マウントポイントの書き込み権限を確認
                 drive_stat = Path(drive_path).stat()
-                click.echo(f"Destination permissions: {oct(drive_stat.st_mode)}")
+                click.secho(f"Destination permissions: {oct(drive_stat.st_mode)}", fg='bright_black')
 
                 # テスト用の小さなファイルを作成してみる
                 test_file = Path(drive_path) / "test_write.txt"
                 test_file.write_text("test")
                 test_file.unlink()  # テストファイル削除
-                click.echo("Write test: successful")
+                click.secho("Write test: successful", fg='bright_black')
 
             except Exception as e:
                 click.echo(f"Destination check error: {e}", err=True)
@@ -400,16 +400,16 @@ class FirmwareWriter:
                 return False
 
             # コピー直前の最終確認
-            click.echo("Final check before copy...")
-            click.echo(f"Mount point exists: {Path(drive_path).exists()}")
+            click.secho("Final check before copy...", fg='bright_black')
+            click.secho(f"Mount point exists: {Path(drive_path).exists()}", fg='bright_black')
             try:
                 # マウントポイント内のファイル一覧を表示
                 files_in_mount = list(Path(drive_path).iterdir())
-                click.echo(f"Files in mount point: {len(files_in_mount)}")
+                click.secho(f"Files in mount point: {len(files_in_mount)}", fg='bright_black')
                 for f in files_in_mount[:5]:  # 最初の5個を表示
-                    click.echo(f"  - {f.name}")
+                    click.secho(f"  - {f.name}", fg='bright_black')
             except Exception as e:
-                click.echo(f"Mount point check error: {e}")
+                click.secho(f"Mount point check error: {e}", fg='bright_black')
 
             # UF2ファイル書き込み (書き込み完了後に自動リセットされる)
             click.echo(f"Starting UF2 file write: {firmware_file.name}")
@@ -422,12 +422,12 @@ class FirmwareWriter:
             try:
                 # まずディレクトリが書き込み可能かもう一度確認
                 if not os.access(drive_path, os.W_OK):
-                    click.echo(
-                        "Warning: No write permission for destination directory"
+                    click.secho(
+                        "Warning: No write permission for destination directory", fg='bright_black'
                     )
 
                 # UF2書き込み: ファイル作成開始
-                click.echo("Writing UF2 file...")
+                click.secho("Writing UF2 file...", fg='bright_black')
                 with open(source_path, "rb") as src:
                     with open(dest_path, "wb") as dst:
                         # チャンクサイズを小さくして進捗を確認
