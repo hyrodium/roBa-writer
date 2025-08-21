@@ -1,0 +1,28 @@
+[project]
+name = "roba-writer"
+version = "0.1.0"
+description = "Seeed xiao nrf52840 左右分割式キーボードファームウェア書き込みツール"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "psutil>=5.9.0",
+    "click>=8.0.0"
+]
+
+[project.scripts]
+roBa-writer = "roBa_writer:cli"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/roBa_writer"]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.12.9",
+]
