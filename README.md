@@ -1,6 +1,6 @@
 # roBa-writer
 
-CLI tool to automate writing firmware for split keyboards such as roBa.
+CLI tool to automate writing firmware for split keyboards such as [roBa](https://github.com/kumamuk-git/roBa).
 
 ## Demo
 
