@@ -4,6 +4,8 @@ CLI tool to automate writing firmware for split keyboards such as [roBa](https:/
 
 ## Demo
 
+https://github.com/user-attachments/assets/9516bb0a-03c2-434f-8f23-b4f264315f4f
+
 https://bsky.app/profile/did:plc:x36h24gabn77ajgedyrysmto/post/3lww26wzsy22q
 
 ## Installation
