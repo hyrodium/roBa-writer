@@ -3,6 +3,7 @@ name = "roba-writer"
 version = "0.1.0"
 description = "Seeed xiao nrf52840 左右分割式キーボードファームウェア書き込みツール"
 readme = "README.md"
+license = "MIT"
 requires-python = ">=3.12"
 dependencies = [
     "psutil>=5.9.0",
